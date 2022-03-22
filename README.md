@@ -1,6 +1,6 @@
 # Lab3-System.IO
 
-### Program contains 9 methods some of them related to system.io library, and others is c# practice.
+### Program contains 9 methods some of them related to system.io library, and others are c# practice.
 
 ### After you clone the project you can open it in vs IDE and run the program.
 
