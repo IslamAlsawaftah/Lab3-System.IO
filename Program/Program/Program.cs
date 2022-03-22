@@ -17,7 +17,7 @@ namespace Program
                 Console.WriteLine("***********************************************");
                 Diamond();
                 Console.WriteLine("***********************************************");
-                int[] arr1 = { 9, 2, 3, 4, 5 };
+                int[] arr1 = { 9, 2, 3, 4, 5, 9};
                 mostFrequent(arr1);
                 Console.WriteLine("***********************************************");
                 int[] arr2 = { 5, 25, 99, 123, 78, 96, 555, 108, 4};
@@ -45,6 +45,7 @@ namespace Program
         }
         public static int Product(string[] input)
         {
+
             int product = 1;
             if (input.Length < 3)
                 return 0;
@@ -157,10 +158,17 @@ namespace Program
         // challenge 7
         public static void ReadFromFile(String filePath, String input)
         {
-            String path = "words.txt";
-            String[] fileContent = File.ReadAllLines(path);
-            for (int i = 0; i < fileContent.Length; i++)
-                Console.WriteLine(fileContent[i]);
+            try
+            {
+                String path = "words.txt";
+                String[] fileContent = File.ReadAllLines(path);
+                for (int i = 0; i < fileContent.Length; i++)
+                    Console.WriteLine(fileContent[i]);
+            }
+            catch (System.IO.FileNotFoundException e)
+            {
+                Console.WriteLine("Message: " + e.Message);
+            }
         }
         // challenge 8 
         public static void DeletFromFile(string path)
