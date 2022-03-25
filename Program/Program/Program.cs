@@ -24,7 +24,7 @@ namespace Program
                 int[] arr2 = { 5, 25, 99, 123, 78, 96, 555, 108, 4 };
                 for (int i = 0; i < arr2.Length; i++)
                 {
-                    Console.Write(arr2[i]);
+                    Console.Write(arr2[i]+ " ");
                 }
                 Console.WriteLine();
                 Console.WriteLine("Max Value in Array : " + Max(arr2));
