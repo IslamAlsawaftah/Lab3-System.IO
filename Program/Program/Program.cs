@@ -7,35 +7,41 @@ namespace Program
     {
         static void Main(string[] args)
         {
-            try { 
-            String filePath = "words.txt";
+            try
+            {
+             String filePath = "words.txt";
             String input = "hello";
                 UserInput();
                 Console.WriteLine("***********************************************");
-                int[] arr = {1,2,3,4,5}; 
-                Avg(arr);
+                UserInputAvg();
                 Console.WriteLine("***********************************************");
                 Diamond();
                 Console.WriteLine("***********************************************");
-                int[] arr1 = { 9, 2, 3, 4, 5, 9};
-                mostFrequent(arr1);
+                int[] arr1 = { 9, 2, 3, 4, 5, 9 };
+                Console.WriteLine();
+                Console.WriteLine("Most Frequent Number is: " + mostFrequent(arr1));
                 Console.WriteLine("***********************************************");
-                int[] arr2 = { 5, 25, 99, 123, 78, 96, 555, 108, 4};
-                Max(arr2);
+                int[] arr2 = { 5, 25, 99, 123, 78, 96, 555, 108, 4 };
+                for (int i = 0; i < arr2.Length; i++)
+                {
+                    Console.Write(arr2[i]);
+                }
+                Console.WriteLine();
+                Console.WriteLine("Max Value in Array : " + Max(arr2));
                 Console.WriteLine("***********************************************");
-                SaveTOFile(filePath,input);
+                SaveTOFile(filePath, input);
                 Console.WriteLine("***********************************************");
-                ReadFromFile(filePath,input);
+                ReadFromFile(filePath, input);
                 Console.WriteLine("***********************************************");
                 DeletFromFile(filePath);
                 Console.WriteLine("***********************************************");
-                Words();
-        }
-                catch (Exception e)
-            {
-                Console.WriteLine("Something error happened" + e.Message);
+                WordsCount(Words());
             }
-        }
+            catch (Exception e)
+            {
+                Console.WriteLine("Something error happened " + e.Message);
+            }
+}
         // challenge 1
         public static void UserInput()
         {
@@ -45,7 +51,6 @@ namespace Program
         }
         public static int Product(string[] input)
         {
-
             int product = 1;
             if (input.Length < 3)
                 return 0;
@@ -59,38 +64,47 @@ namespace Program
                 return product;
         }
         // challenge 2
-        public static double Avg(int[] numbers)
+        public static int Avg(int[] arr)
         {
             int sum = 0;
-            Console.WriteLine("Please enter a number between 2 - 10:");
-            int input = Convert.ToInt32(Console.ReadLine());
-            while (input < 2 || input > 10)
+            for (int i = 0; i < arr.Length; i++)
             {
-                Console.Write("Please enter a number between 2 - 10: \n");
-                input = Convert.ToInt32(Console.ReadLine());
+                sum += arr[i];
             }
-            numbers = new int[input];
-            for (int i = 0; i < numbers.Length; i++)
-            {
-                Console.Write("{0} of " + numbers.Length + " - Enter a number: ", i + 1);
-                if (Int32.TryParse(Console.ReadLine(), out input))
-                {
-                    numbers[i] = input;
-                    sum += numbers[i];
-                }
-                if (input < 0)
-                {
-                    Console.WriteLine("Please enter positive numbers");
-                    i--;
-                }
-            }
-            double avg = (double)sum / (double)numbers.Length;
-            Console.WriteLine("The average of these " + numbers.Length + " numbers are: " + avg);
+            int avg = sum / arr.Length;
+            Console.WriteLine("The average of these " + arr.Length + " numbers are: " + avg);
             return avg;
         }
+        public static int UserInputAvg()
+        {
+                Console.WriteLine("Please enter a number between 2 - 10:");
+                int input;
+                while (!Int32.TryParse(Console.ReadLine(), out input)) //for empty user inputs 
+                {
+                    Console.Write("Please enter a number between 2 - 10: \n");
+                }
+                while (input < 2 || input > 10)
+                {
+                    Console.Write("Please enter a number between 2 - 10: \n");
+                    input = Convert.ToInt32(Console.ReadLine());
+                }
+                int[] numbers = new int[input];
+                int res;
+                for (int i = 0; i < numbers.Length; i++)
+                {
+                Console.Write("{0} of " + input + " - Enter a number: ", i + 1);
+                while (!Int32.TryParse(Console.ReadLine(), out res) || res < 0 ) // for empty user's input
+                    {
+                        Console.WriteLine("please enter positive numbers only");
+                        Console.Write(i + 1 + " of " + input + " - Enter a number: ");
+                    }
+                numbers[i] = res;
+            }
+            return Avg(numbers);
+        }
 
-        // challenge 3
-        public static void Diamond()
+    // challenge 3
+    public static void Diamond()
         {
             int r = 5,i,j;
             for (i = 0; i <= r; i++)
@@ -126,7 +140,6 @@ namespace Program
                     curr_count = 1; // if number have one occurence  
                 }
             }
-            Console.WriteLine("Most Frequent Number is: " +res);
             return res; 
         }
         // challeng 5
@@ -140,7 +153,6 @@ namespace Program
                     max = arr[i];
                 }
             }
-            Console.WriteLine("Max Value in Array : " + max);
             return max;
         }
         // challenge 6 
@@ -178,19 +190,22 @@ namespace Program
             Console.WriteLine(last);
         }
         // challenge 9 
-        public static void Words()
+        public static string Words()
         {
-            Console.WriteLine("Please enter a sentence:");
+            Console.WriteLine("please enter a sentence ");
             string text = Console.ReadLine();
-            WordsCount(text);
+            return text;
         }
         public static string[] WordsCount(string text)
         {
-            string[] arr = text.Split(' ');
-            string[] words = new string[text.Length];
-            foreach (string s in arr)
-                Console.WriteLine("[" + s + ":" + s.Length + "],");
-            return words;
+            string[] sentence = text.Split(" ");
+            string[] str = new string[sentence.Length];
+            for (int i = 0; i < sentence.Length; i++)
+            {
+                str[i] = $"{sentence[i]}:{sentence[i].Length},";
+                Console.Write(str[i]);
+            }
+            return str;
         }
     }
     }
